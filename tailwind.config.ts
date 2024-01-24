@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        cmu: ['serif']
+        cmu: ['CMU Serif', 'serif']
       },
       colors: {
         'whiteish': '#fffcf5',

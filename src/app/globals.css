@@ -46,7 +46,7 @@ body {
   font-style: bold;
   font-weight: 400;
   src: local(''),
-    url('/cmunbx.woff') format('woff');
+    url('/gpa-calculator/cmunbx.woff') format('woff');
 }
 
 @font-face {
@@ -54,7 +54,7 @@ body {
   font-style: normal;
   font-weight: 400;
   src: local(''),
-    url('/cmunrm.woff') format('woff');
+    url('/gpa-calculator/cmunrm.woff') format('woff');
 }
 
 
