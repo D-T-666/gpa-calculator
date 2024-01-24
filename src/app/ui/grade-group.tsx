@@ -26,7 +26,7 @@ export default function GradeGroup({ data, sem, course, group, dispatch }: { dat
             })} onClick={() => setUnfolded(!unfolded)}>
                 <Image
                     priority
-                    src="/arrow.svg"
+                    src="/gpa-calculator/arrow.svg"
                     alt="Follow us on Twitter"
                     fill={true}
                 />

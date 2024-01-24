@@ -22,7 +22,7 @@ export default function Header({ data }: { data: Semesters }) {
             <button className="relative w-8 text-brownish text-center rotate-90" onClick={() => {}}>
                 <Image
                     priority
-                    src="/arrow.svg"
+                    src="/gpa-calculator/arrow.svg"
                     alt="Follow us on Twitter"
                     fill={true}
                 />
