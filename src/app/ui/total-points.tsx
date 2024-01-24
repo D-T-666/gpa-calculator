@@ -15,12 +15,13 @@ export default function TotalPoints({ data, sem, course, dispatch }: { data: Sem
     };
 
     return (
-        <div className="relative pb-2 flex flex-col items-center w-full text-3xl">
+        <div className="relative pb-2 mt-6 flex flex-col items-center w-full text-3xl">
             <input 
                 className="relative shadow-[inset_0_0_8px_0_rgba(0,0,0,0.1)] text-7xl text-center rounded-lg w-36 pt-3 bg-whiteish font-normal" 
                 type="number" 
                 value={ data[sem][course].total || "" }
                 onChange={e => change_handler(e)} 
+                onWheel={e => (e.target as HTMLElement).blur()}
                 min={0}
                 max={100}
             />
