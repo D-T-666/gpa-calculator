@@ -32,7 +32,9 @@ function Semester({ data, semester, currentSemester, setCurrentSemester }: { dat
         <button ref={ref} className={clsx("min-w-60 flex-column snap-center align-middle py-8 font-cmu", {
             "opacity-25": currentSemester !== semester
         })} onClick={handleClick}>
-            <div className="text-4xl underline text-center">
+            <div className={clsx("text-4xl text-center", {
+                "underline": currentSemester === semester
+            })}>
                 Semester {semester + 1}
             </div>
             <div className="text-2xl opacity-50 text-center">
