@@ -8,6 +8,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        cmu: ['serif']
+      },
+      colors: {
+        'whiteish': '#fffcf5',
+        'greyblue': '#363e45',
+        'brownish': '#a9a39b'
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

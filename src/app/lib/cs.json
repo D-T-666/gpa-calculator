@@ -1,0 +1,110 @@
+{
+    "0": {
+        "Discrete Structures": {
+            "credits": 9,
+            "mode": "total"
+        },
+        "Computer Architecture": {
+            "credits": 6,
+            "mode": "total"
+        },
+        "Introduction to Informatics": {
+            "credits": 6,
+            "mode": "total"
+        },
+        "Fundamentals of Programming": {
+            "credits": 6,
+            "mode": "total"
+        },
+        "English": {
+            "credits": 3,
+            "mode": "total"
+        }
+    },
+    "1": {
+        "Analysis for Informatics": {
+            "credits": 9,
+            "mode": "total",
+            "curriculum": {
+            "Homework": {
+                "drop": 3,
+                "items": {
+                "Week 1": { "max_points": 2 },
+                "Week 2": { "max_points": 2 },
+                "Week 3": { "max_points": 2 },
+                "Week 4": { "max_points": 2 },
+                "Week 5": { "max_points": 2 },
+                "Week 6": { "max_points": 2 },
+                "Week 7": { "max_points": 2 },
+                "Week 8": { "max_points": 2 },
+                "Week 9": { "max_points": 2 },
+                "Week 10": { "max_points": 2 },
+                "Week 11": { "max_points": 2 },
+                "Week 12": { "max_points": 2 },
+                "Week 13": { "max_points": 2 }
+                }
+            },
+            "Quiz": {
+                "drop": 1,
+                "items": {
+                "Quiz 1": { "max_points": 10 },
+                "Quiz 2": { "max_points": 10 },
+                "Quiz 3": { "max_points": 10 }
+                }
+            },
+            "Midterm exam": {
+                "drop": 1,
+                "items": {
+                "Midterm 1": { "max_points": 15 },
+                "Midterm 2": { "max_points": 15 },
+                "Midterm 3": { "max_points": 15 }
+                }
+            },
+            "Final exam": {
+                "drop": 0,
+                "items": {
+                "Final": { "max_points": 30 }
+                }
+            }
+            }
+        },
+        "Basic Principles of Operating Systems": {
+            "credits": 6,
+            "mode": "total"
+        },
+        "Computer Architecture Lab": {
+            "credits": 6,
+            "mode": "total"
+        },
+        "English": {
+            "credits": 3,
+            "mode": "total"
+        },
+        "Introduction to Informatics 2": {
+            "credits": 6,
+            "mode": "total"
+        }
+    },
+    "2": {
+        "Algorithms and Data Structures": {
+            "credits": 6,
+            "mode": "total"
+        },
+        "Introduction to Databases": {
+            "credits": 6,
+            "mode": "total"
+        },
+        "Linear Algebra for Informatics": {
+            "credits": 6,
+            "mode": "total"
+        },
+        "Numerical Linear Algebra": {
+            "credits": 6,
+            "mode": "total"
+        },
+        "Analysis 2": {
+            "credits": 6,
+            "mode": "total"
+        }
+    }
+}
