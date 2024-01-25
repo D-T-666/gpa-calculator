@@ -40,7 +40,7 @@ export default function CardList({ semester, data, dispatch }: CardListProps) {
       </button>
       {
         available && available_courses(data, semester, cs_data).map((course, index) => (
-          <AddCard {...{data, dispatch, course}} sem={semester}/>
+          <AddCard {...{data, dispatch, course}} sem={semester} key={index}/>
         ))
       }
     </div>
