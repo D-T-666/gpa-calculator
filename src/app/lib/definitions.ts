@@ -43,6 +43,7 @@ export type UserSemesterData = {
 };
 
 export type UserData = {
+    version: string;
     semesters: {
         [semester: number]: UserSemesterData;
     }

@@ -154,8 +154,8 @@ export default function Home() {
     return res;
   };
 
-  let saved_data = null;
   let default_data = {
+    version: "0.0.1",
     semesters: {
       0: {
         "Discrete Structures": {
@@ -164,12 +164,20 @@ export default function Home() {
         }
       }
     }
-  };
+  } as UserData;
+  
+  let saved_data = null;
   if (typeof window !== "undefined") {
     saved_data = window.localStorage.getItem("data");
+    if (saved_data !== null) {
+      saved_data = JSON.parse(saved_data) as UserData;
+      if (saved_data.version !== default_data.version) {
+        saved_data = null;
+      }
+    }
   }
 
-  const [data, dispatch] = useReducer(reducer, (saved_data !== null ? JSON.parse(saved_data) : default_data) as UserData);
+  const [data, dispatch] = useReducer(reducer, (saved_data !== null ? saved_data : default_data) );
 
   console.log(data);
 
