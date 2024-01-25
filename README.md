@@ -4,7 +4,7 @@ This website good. Only for KIU students.
 
 total points             |  continuous assesment
 -------------------------|-------------------------
-<img src="/images/ss-1.png" width="20rem" />  |  <img src="/images/ss-2.png" width="20rem" />
+<img src="/images/ss-1.png" width="300rem" />  |  <img src="/images/ss-2.png" width="300rem" />
 
 ### features
 
