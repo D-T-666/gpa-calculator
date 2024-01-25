@@ -1,18 +1,21 @@
 'use client';
 
 import { useMemo, useState } from "react";
-import { Semesters } from "../lib/definitions";
+import { CourseDict, UserData } from "../lib/definitions";
 import TypeSwitch from "./type-switch";
 import GradeGroup from "./grade-group";
 import TotalPoints from "./total-points";
-import { calculateGPASemesters, inRangeOrEqualString } from "../lib/calculations";
+import { total_GPA, in_range_or_equal_string } from "../lib/calculations";
 import Image from "next/image";
 
-export default function Header({ data }: { data: Semesters }) {
+import cs_data_ from "../lib/cs.json";
+const cs_data = cs_data_ as CourseDict;
+
+export default function Header({ data }: { data: UserData }) {
     let total_gpa_string = useMemo(
-        () => inRangeOrEqualString(
-            Math.round((calculateGPASemesters(data, false) + Number.EPSILON) * 100) / 100,
-            Math.round((calculateGPASemesters(data, true) + Number.EPSILON) * 100) / 100
+        () => in_range_or_equal_string(
+            Math.round((total_GPA(data, cs_data, false) + Number.EPSILON) * 100) / 100,
+            Math.round((total_GPA(data, cs_data, true) + Number.EPSILON) * 100) / 100
         ),
         [data]
     );

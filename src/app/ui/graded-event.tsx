@@ -1,9 +1,22 @@
 'use client';
 
 import { ChangeEvent } from "react";
-import { Semesters } from "../lib/definitions";
+import { CourseDict, UserData } from "../lib/definitions";
 
-export default function GradedEvent({ data, sem, course, group, item, dispatch }: { data: Semesters, sem: number, course: string, group: string, item: string, dispatch: Function }) {
+import cs_data_ from "../lib/cs.json";
+const cs_data = cs_data_ as CourseDict;
+
+export type GradedEventProps = {
+  data: UserData, 
+  sem: number, 
+  course: string, 
+  group: string, 
+  item: string, 
+  dispatch: Function 
+};
+
+
+export default function GradedEvent({ data, sem, course, group, item, dispatch }: GradedEventProps) {
   const change_handler = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch({
       semester: sem,
@@ -23,12 +36,12 @@ export default function GradedEvent({ data, sem, course, group, item, dispatch }
       <input 
         className="shadow-[inset_0_0_8px_0_rgba(0,0,0,0.1)] w-12 h-10 pt-1 -translate-y-0.5 rounded-lg text-right px-1 bg-whiteish font-normal" 
         type="number" 
-        value={data[sem][course].curriculum![group].items[item].points || ""} 
+        value={data.semesters[sem][course].curriculum![group][item] || ""} 
         onChange={e => change_handler(e)} 
         min={0}
-        max={data[sem][course].curriculum![group].items[item].max_points}
+        max={cs_data[course].curriculum![group].items[item].max_points}
       />
-      /{data[sem][course].curriculum![group].items[item].max_points}
+      /{cs_data[course].curriculum![group].items[item].max_points}
     </div>
   );
 }

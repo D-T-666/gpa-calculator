@@ -1,19 +1,22 @@
 'use client';
 
 import clsx from "clsx";
-import { GradeGroup, GradeItem, Semesters } from "../lib/definitions";
+import { CourseDict, GradeGroup, GradeItem, UserData } from "../lib/definitions";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import GradedEvent from "./graded-event";
-import { calculatePointsGradeGroup, inRangeOrEqualString } from "../lib/calculations";
+import { grade_group_points, in_range_or_equal_string } from "../lib/calculations";
 
-export default function GradeGroup({ data, sem, course, group, dispatch }: { data: Semesters, sem: number, course: string, group: string, dispatch: Function }) {
+import cs_data_ from "../lib/cs.json";
+const cs_data = cs_data_ as CourseDict;
+
+export default function GradeGroup({ data, sem, course, group, dispatch }: { data: UserData, sem: number, course: string, group: string, dispatch: Function }) {
   const [unfolded, setUnfolded] = useState(false);
   
   const points_range_string = useMemo(() => 
-    inRangeOrEqualString(
-        calculatePointsGradeGroup(data[sem][course].curriculum![group], false),
-        calculatePointsGradeGroup(data[sem][course].curriculum![group], true)
+    in_range_or_equal_string(
+        grade_group_points(data.semesters[sem][course].curriculum![group], cs_data[course].curriculum![group], false),
+        grade_group_points(data.semesters[sem][course].curriculum![group], cs_data[course].curriculum![group], true)
     ), 
     [data, sem, course, group]
   );
@@ -44,7 +47,7 @@ export default function GradeGroup({ data, sem, course, group, dispatch }: { dat
                 </div>
                 <hr className="border-brownish"/>
                 {
-                    Object.keys(data[sem][course].curriculum![group].items).map((item, index) => 
+                    Object.keys(data.semesters[sem][course].curriculum![group]).map((item, index) => 
                         <GradedEvent {...{data, sem, course, group, dispatch, item}} key={index} />
                     )
                 }

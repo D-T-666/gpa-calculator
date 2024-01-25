@@ -1,10 +1,13 @@
 'use client';
 
 import { ChangeEvent } from "react";
-import { Semesters } from "../lib/definitions";
-import { pointsToGP } from "../lib/calculations";
+import { course_GP, points_to_GP } from "../lib/calculations";
+import { CourseDict, UserData } from "../lib/definitions";
 
-export default function TotalPoints({ data, sem, course, dispatch }: { data: Semesters, sem: number, course: string, dispatch: Function }) {
+import cs_data_ from "../lib/cs.json";
+const cs_data = cs_data_ as CourseDict;
+
+export default function TotalPoints({ data, sem, course, dispatch }: { data: UserData, sem: number, course: string, dispatch: Function }) {
     const change_handler = (e: ChangeEvent<HTMLInputElement>) => {
       dispatch({
         type: "update total points",
@@ -19,17 +22,14 @@ export default function TotalPoints({ data, sem, course, dispatch }: { data: Sem
             <input 
                 className="relative shadow-[inset_0_0_8px_0_rgba(0,0,0,0.1)] text-7xl text-center rounded-lg w-36 pt-3 bg-whiteish font-normal" 
                 type="number" 
-                value={ data[sem][course].total || "" }
+                value={ data.semesters[sem][course].total || "" }
                 onChange={e => change_handler(e)} 
                 onWheel={e => (e.target as HTMLElement).blur()}
                 min={0}
                 max={100}
             />
-            {/* // <div className="text-7xl m-6">
-            //   { data[sem][course].total !== null ? data[sem][course].total : ""}
-            // </div> */}
             <div className="text-brownish text-lg">
-              GPA: { pointsToGP(data[sem][course].total || 0) }
+              GPA: { data.semesters[sem][course].mode === "total" ? points_to_GP(data.semesters[sem][course].total!) : course_GP(data.semesters[sem][course].curriculum!, cs_data[course].curriculum!) }
             </div>
         </div>
     );

@@ -1,7 +1,6 @@
-
+// Main data, not user dependent
 export type GradeItem = {
     max_points: number;
-    points?: number;
     threshold?: number;
 };
 
@@ -18,18 +17,38 @@ export type Curriculum = {
 
 export type Course = {
     credits: number;
-    mode: "total" | "continuous";
+    parity: "fall" | "spring";
+    pre_requisites?: string[];
     curriculum?: Curriculum;
+};
+
+export type CourseDict = {
+    [course_name: string]: Course;
+};
+
+// User dependent data
+export type UserCurriculumData = {
+    [group_name: string]: {
+        [item_name: string]: number | null;
+    }
+}
+export type UserCourseData = {
+    mode: "total" | "continuous";
+    curriculum?: UserCurriculumData;
     total?: number;
 };
 
-export type Semester = {
-    [title: string]: Course;
+export type UserSemesterData = {
+    [course_name: string]: UserCourseData;
 };
 
-export type Semesters = {
-    [sem: number]: Semester;
+export type UserData = {
+    semesters: {
+        [semester: number]: UserSemesterData;
+    }
 };
+
+
 
 export type DataUpdateAction = {
     type: "update continuous points";
@@ -49,6 +68,12 @@ export type DataUpdateAction = {
     course: string;
 } | {
     type: "convert to continuous";
+    semester: number;
+    course: string;
+} | {
+    type: "add semester";
+} | {
+    type: "add course";
     semester: number;
     course: string;
 };
