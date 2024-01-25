@@ -1,10 +1,13 @@
 'use client';
 
 import { useState } from "react";
-import { UserData } from "../lib/definitions";
+import { CourseDict, UserData } from "../lib/definitions";
 import TypeSwitch from "./type-switch";
 import GradeGroup from "./grade-group";
 import TotalPoints from "./total-points";
+
+import cs_data_ from "../lib/cs.json";
+const cs_data = cs_data_ as CourseDict;
 
 export default function Card({ data, sem, course, dispatch }: { course: string; data: UserData, sem: number, dispatch: Function }) {
   return (
@@ -13,7 +16,7 @@ export default function Card({ data, sem, course, dispatch }: { course: string; 
             {course}
         </h1>
         {
-            data.semesters[sem][course].curriculum !== undefined
+            cs_data[course].curriculum !== undefined
             ? <TypeSwitch {...{data, sem, course, dispatch}} />
             : <></>
         }

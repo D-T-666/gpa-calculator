@@ -20,71 +20,58 @@ export default function Home() {
     let res = data;
     switch (action.type) {
       case "update continuous points": {
-        console.log(typeof data.semesters[action.semester][action.course]);
-        // if (data[action.semester][action.course])
-        // if (data[action.semester][action.course].mode === "continuous") {
-        //   let temp = {
-        //     ...data,
-        //     [action.semester]: {
-        //       ...data[action.semester],
-        //       [action.course]: {
-        //         ...data[action.semester][action.course],
-        //         curriculum: {
-        //           ...data[action.semester][action.course].curriculum,
-        //           [action.group]: {
-        //             ...data[action.semester][action.course].curriculum![action.group],
-        //             items: {
-        //               ...data[action.semester][action.course].curriculum![action.group].items,
-        //               [action.item]: {
-        //                 ...data[action.semester][action.course].curriculum![action.group].items[action.item],
-        //                 points: action.points
-        //               }
-        //             }
-        //           }
-        //         },
-        //       }
-        //     }
-        //   } as Semesters;
-        //   res = {
-        //     ...temp,
-        //     [action.semester]: {
-        //       ...temp[action.semester],
-        //       [action.course]: {
-        //         ...temp[action.semester][action.course],
-        //         total: course_points(temp[action.semester][action.course].curriculum!)
-        //       }
-        //     }
-        //   } as Semesters;
-        // } else {
-        //   res = data;
-        // }
+        res = {
+          ...data,
+          semesters: {
+            ...data.semesters,
+            [action.semester]: {
+              ...data.semesters[action.semester],
+              [action.course]: {
+                ...data.semesters[action.semester][action.course],
+                curriculum: {
+                  ...data.semesters[action.semester][action.course].curriculum,
+                  [action.group]: {
+                    ...data.semesters[action.semester][action.course].curriculum![action.group],
+                    [action.item]: action.points
+                  }
+                },
+              }
+            }
+          }
+        } as UserData;
         break;
       }
       case "update total points": {
-        // res = {
-        //   ...data,
-        //   [action.semester]: {
-        //     ...data[action.semester],
-        //     [action.course]: {
-        //       ...data[action.semester][action.course],
-        //       total: action.points
-        //     }
-        //   }
-        // } as Semesters
+        res = {
+          ...data,
+          semesters: {
+            ...data.semesters,
+            [action.semester]: {
+              ...data.semesters[action.semester],
+              [action.course]: {
+                ...data.semesters[action.semester][action.course],
+                total: action.points
+              }
+            }
+          }
+        } as UserData;
         break;
       }
       case "convert to total": {
-        // res = {
-        //   ...data,
-        //   [action.semester]: {
-        //     ...data[action.semester],
-        //     [action.course]: {
-        //       ...data[action.semester][action.course],
-        //       mode: "total",
-        //       total: course_points(data[action.semester][action.course].curriculum!)
-        //     }
-        //   }
-        // } as Semesters
+        res = {
+          ...data,
+          semesters: {
+            ...data.semesters,
+            [action.semester]: {
+              ...data.semesters[action.semester],
+              [action.course]: {
+                ...data.semesters[action.semester][action.course],
+                mode: "total",
+                total: course_points(data.semesters[action.semester][action.course].curriculum!, cs_data[action.course].curriculum!)
+              }
+            }
+          }
+        } as UserData
         break;
       }
       case "convert to continuous": {
@@ -151,11 +138,12 @@ export default function Home() {
     if (typeof window !== "undefined") {
       window.localStorage.setItem("data", JSON.stringify(res));
     }
+
     return res;
   };
 
   let default_data = {
-    version: "0.0.1",
+    version: "0.0.2",
     semesters: {
       0: {
         "Discrete Structures": {
@@ -178,8 +166,6 @@ export default function Home() {
   }
 
   const [data, dispatch] = useReducer(reducer, (saved_data !== null ? saved_data : default_data) );
-
-  console.log(data);
 
   const [semester, setSemester] = useState(0);
 

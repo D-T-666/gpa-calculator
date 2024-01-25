@@ -95,13 +95,18 @@ export function in_range_or_equal_string(a: number, b: number): string {
 
 export function available_courses(user_data: UserData, semester: number, courses: CourseDict): string[] {
     let not_eligible = [];
+    let completed = [];
 
     for (let [sem, sem_data] of Object.entries(user_data.semesters)) {
         for (let [course, course_data] of Object.entries(sem_data)) {
-            // let points = course_data.mode === "total"
-            //     ? course_data.total!
-                // : course_points(course_data.curriculum!, courses[course].curriculum!);
+            let points = course_data.mode === "total"
+                ? course_data.total!
+                : course_points(course_data.curriculum!, courses[course].curriculum!);
             
+            if (points > 50 && Number(sem) < semester) {
+                completed.push(course);
+            }
+
             if (Number(sem) === semester) {
                 not_eligible.push(course);
             }
@@ -118,7 +123,7 @@ export function available_courses(user_data: UserData, semester: number, courses
             let valid = true;
             if (course_data.pre_requisites !== undefined) {
                 for (let pre_requisite of course_data.pre_requisites!) {
-                    valid &&= not_eligible.indexOf(pre_requisite) !== -1;
+                    valid &&= completed.indexOf(pre_requisite) !== -1;
                 }
             }
             if (valid) {

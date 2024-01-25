@@ -17,11 +17,13 @@ function Semester({ data, semester, currentSemester, setCurrentSemester }: { dat
         console.log(semester);
     };
 
-    const points_range_string = useMemo(() => 
-        in_range_or_equal_string(
-            Math.round((semester_GPA(data.semesters[semester], cs_data, false) + Number.EPSILON) * 100) / 100,
-            Math.round((semester_GPA(data.semesters[semester], cs_data, true) + Number.EPSILON) * 100) / 100
-        ), 
+    const points_range_string = useMemo(() => {
+            console.log(data.semesters[semester]);
+            return in_range_or_equal_string(
+                Math.round((semester_GPA(data.semesters[semester], cs_data, false) + Number.EPSILON) * 100) / 100,
+                Math.round((semester_GPA(data.semesters[semester], cs_data, true) + Number.EPSILON) * 100) / 100
+            ) || 0
+        }, 
         [data, semester]
     );
 

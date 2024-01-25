@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { CourseDict, UserData } from "../lib/definitions";
 
 import cs_data_ from "../lib/cs.json";
@@ -37,7 +37,7 @@ export default function GradedEvent({ data, sem, course, group, item, dispatch }
         className="shadow-[inset_0_0_8px_0_rgba(0,0,0,0.1)] w-12 h-10 pt-1 -translate-y-0.5 rounded-lg text-right px-1 bg-whiteish font-normal" 
         type="number" 
         value={data.semesters[sem][course].curriculum![group][item] || ""} 
-        onChange={e => change_handler(e)} 
+        onChange={change_handler} 
         min={0}
         max={cs_data[course].curriculum![group].items[item].max_points}
       />
