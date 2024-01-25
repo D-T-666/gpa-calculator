@@ -165,9 +165,9 @@ export default function Home() {
       }
     }
   };
-  // if (typeof window !== "undefined") {
-  //   saved_data = window.localStorage.getItem("data");
-  // }
+  if (typeof window !== "undefined") {
+    saved_data = window.localStorage.getItem("data");
+  }
 
   const [data, dispatch] = useReducer(reducer, (saved_data !== null ? JSON.parse(saved_data) : default_data) as UserData);
 
