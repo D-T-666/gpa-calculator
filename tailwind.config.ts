@@ -14,7 +14,8 @@ const config: Config = {
       colors: {
         'whiteish': '#fffcf5',
         'greyblue': '#363e45',
-        'brownish': '#a9a39b'
+        'brownish': '#a9a39b',
+        'redish': '#ff573c'
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

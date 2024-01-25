@@ -113,10 +113,17 @@ export function available_courses(user_data: UserData, semester: number, courses
         }
     }
 
+    let available_credits = semester % 2 === 0
+        ? 36 - semester_total_credits(user_data.semesters[semester], courses)
+        : 66 - semester_total_credits(user_data.semesters[semester], courses) - semester_total_credits(user_data.semesters[semester-1], courses);
+
     let available = [];
 
     for (let [course, course_data] of Object.entries(courses)) {
         if ((course_data.parity === "fall") === (semester % 2 !== 0)) 
+            continue;
+
+        if (course_data.credits > available_credits)
             continue;
 
         if (not_eligible.indexOf(course) === -1) {

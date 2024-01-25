@@ -9,6 +9,7 @@ const cs_data = cs_data_ as CourseDict;
 
 export default function TotalPoints({ data, sem, course, dispatch }: { data: UserData, sem: number, course: string, dispatch: Function }) {
     const change_handler = (e: ChangeEvent<HTMLInputElement>) => {
+      console.log(e);
       dispatch({
         type: "update total points",
         semester: sem,

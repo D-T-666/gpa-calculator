@@ -3,7 +3,14 @@
 import clsx from "clsx";
 import { UserData } from "../lib/definitions";
 
-export default function TypeSwitch({ data, sem, course, dispatch }: { data: UserData, sem: number, course: string, dispatch: Function }) {
+type TypeSwitchProps = {
+    data: UserData;
+    sem: number;
+    course: string;
+    dispatch: Function;
+};
+
+export default function TypeSwitch({ data, sem, course, dispatch }: TypeSwitchProps) {
     const change_to_total = () => {
         dispatch({
             type: "convert to total",
@@ -22,16 +29,21 @@ export default function TypeSwitch({ data, sem, course, dispatch }: { data: User
         
     return (
         <div className="relative rounded-full flex justify-evenly overflow-hidden border-brownish border my-6">
-            <button className={clsx("text-2xl w-full p-0.5 text-center font-cmu", {
-                "bg-brownish text-whiteish": data.semesters[sem][course].mode === "continuous",
-                "bg-transparent text-brownish": data.semesters[sem][course].mode !== "continuous"
-            })} onClick={change_to_continuous}>
+            <button 
+                className={clsx("text-2xl w-full p-0.5 text-center font-cmu", {
+                    "bg-brownish text-whiteish": data.semesters[sem][course].mode === "continuous",
+                    "bg-transparent text-brownish": data.semesters[sem][course].mode !== "continuous"
+                })} 
+                onClick={change_to_continuous}>
                 {"Continuous"}
             </button>
-            <button className={clsx("text-2xl w-full p-0.5 text-center font-cmu", {
-                "bg-brownish text-whiteish": data.semesters[sem][course].mode === "total",
-                "bg-transparent text-brownish": data.semesters[sem][course].mode !== "total"
-            })} onClick={change_to_total}>
+
+            <button 
+                className={clsx("text-2xl w-full p-0.5 text-center font-cmu", {
+                    "bg-brownish text-whiteish": data.semesters[sem][course].mode === "total",
+                    "bg-transparent text-brownish": data.semesters[sem][course].mode !== "total"
+                })} 
+                onClick={change_to_total}>
                 {"Total"}
             </button>
         </div>

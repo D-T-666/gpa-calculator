@@ -44,7 +44,7 @@ body {
 @font-face {
   font-family: 'CMU Serif';
   font-style: bold;
-  font-weight: 400;
+  font-weight: 700;
   src: local(''),
     url('/gpa-calculator/cmunbx.woff') format('woff');
 }

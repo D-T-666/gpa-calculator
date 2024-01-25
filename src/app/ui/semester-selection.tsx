@@ -8,39 +8,45 @@ import { CourseDict, UserData } from "../lib/definitions";
 import cs_data_ from "../lib/cs.json";
 const cs_data = cs_data_ as CourseDict;
 
-function Semester({ data, semester, currentSemester, setCurrentSemester }: { data: UserData, semester: number, currentSemester: number, setCurrentSemester: Function }) {
+type SemesterTabProps = {
+    data: UserData;
+    index: number;
+    activeSemester: number;
+    setActiveSemester: Function;
+};
+
+function SemesterTab({ data, index, activeSemester, setActiveSemester }: SemesterTabProps) {
     const ref = useRef<null | HTMLButtonElement>(null);
 
     const handleClick = () => {
         ref.current?.scrollIntoView({ behavior: 'smooth', inline: "center" });
-        setCurrentSemester(semester);
-        console.log(semester);
+        setActiveSemester(index);
+        console.log(index);
     };
 
     const points_range_string = useMemo(() => {
-            console.log(data.semesters[semester]);
             return in_range_or_equal_string(
-                Math.round((semester_GPA(data.semesters[semester], cs_data, false) + Number.EPSILON) * 100) / 100,
-                Math.round((semester_GPA(data.semesters[semester], cs_data, true) + Number.EPSILON) * 100) / 100
+                Math.round((semester_GPA(data.semesters[index], cs_data, false) + Number.EPSILON) * 100) / 100,
+                Math.round((semester_GPA(data.semesters[index], cs_data, true) + Number.EPSILON) * 100) / 100
             ) || 0
         }, 
-        [data, semester]
+        [data, index]
     );
 
     useEffect(() => {
-        if (semester === currentSemester) {
+        if (index === activeSemester) {
             ref.current!.scrollIntoView({ inline: "center" });
         }
     }, []);
 
     return (
         <button ref={ref} className={clsx("flex-column snap-center align-middle py-8 font-cmu", {
-            "opacity-50": currentSemester !== semester
+            "opacity-50": activeSemester !== index
         })} onClick={handleClick}>
             <div className={clsx("min-w-60 text-4xl", {
-                "underline text-center": currentSemester === semester
+                "underline text-center": activeSemester === index
             })}>
-                Semester {semester + 1}
+                Semester {index + 1}
             </div>
             <div className="text-2xl opacity-50 text-center">
                 GPA {points_range_string}
@@ -54,10 +60,10 @@ function Semester({ data, semester, currentSemester, setCurrentSemester }: { dat
 export type AddSemesterButtonProps = {
     data: UserData;
     dispatch: Function;
-    semester: number;
+    activeSemester: number;
 };
 
-export function AddSemesterButton({ data, dispatch, semester }: AddSemesterButtonProps) {
+export function AddSemesterButton({ data, dispatch, activeSemester }: AddSemesterButtonProps) {
     let handleClick = () => {
         dispatch({
             type: "add semester"
@@ -67,8 +73,8 @@ export function AddSemesterButton({ data, dispatch, semester }: AddSemesterButto
     return (
         <button
             className={clsx("relative text-whiteish text-3xl px-4", {
-                "opacity-50": semester === Object.keys(data.semesters).length - 1,
-                "opacity-0": semester !== Object.keys(data.semesters).length - 1,
+                "opacity-50": activeSemester === Object.keys(data.semesters).length - 1,
+                "opacity-0": activeSemester !== Object.keys(data.semesters).length - 1,
             })}
             onClick={handleClick}>
             Add
@@ -79,24 +85,25 @@ export function AddSemesterButton({ data, dispatch, semester }: AddSemesterButto
 // The bar itself
 
 export type SemesterBarProps = {
-    semesters: number;
-    semester: number;
-    setSemester: Function;
+    activeSemester: number;
+    setActiveSemester: Function;
     data: UserData;
     dispatch: Function;
 };
 
-export function SemesterBar({ data, semesters, semester, setSemester, dispatch }: SemesterBarProps) {
+export function SemesterBar({ data, activeSemester, setActiveSemester, dispatch }: SemesterBarProps) {
   return (
     <div className="relative bg-greyblue flex-shrink-0 px-8 overflow-x-scroll snap-x snap-proximity touch-none no-scrollbar">
         <div className="relative flex">
             <div className="relative min-w-full snap-none"></div>
             {
-                [...Array(semesters)].map((_, index) => (
-                    <Semester data={data} semester={index} currentSemester={semester} setCurrentSemester={setSemester} key={index} />
+                Object.keys(data.semesters).map((_, index) => (
+                    <SemesterTab 
+                        {...{data, index, activeSemester, setActiveSemester}}
+                        key={index} />
                 ))
             }
-            <AddSemesterButton {...{data, dispatch, semester}} />
+            <AddSemesterButton {...{data, dispatch, activeSemester}} />
             <div className="relative min-w-full snap-none"></div>
         </div>
     </div>
