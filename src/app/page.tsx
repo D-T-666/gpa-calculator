@@ -163,7 +163,7 @@ const reducer = (data: UserData, action: DataUpdateAction): UserData => {
 
 export default function Home() {
   let default_data = {
-    version: "0.0.2",
+    version: "0.0.3",
     semesters: {
       0: {
         "Discrete Structures": {
@@ -175,15 +175,15 @@ export default function Home() {
   } as UserData;
   
   let saved_data = null;
-  // if (typeof window !== "undefined") {
-  //   saved_data = window.localStorage.getItem("data");
-  //   if (saved_data !== null) {
-  //     saved_data = JSON.parse(saved_data) as UserData;
-  //     if (saved_data.version !== default_data.version) {
-  //       saved_data = null;
-  //     }
-  //   }
-  // }
+  if (typeof window !== "undefined") {
+    saved_data = window.localStorage.getItem("data");
+    if (saved_data !== null) {
+      saved_data = JSON.parse(saved_data) as UserData;
+      if (saved_data.version !== default_data.version) {
+        saved_data = null;
+      }
+    }
+  }
 
   const [data, dispatch] = useReducer(reducer, (saved_data !== null ? saved_data : default_data) );
 

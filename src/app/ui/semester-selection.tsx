@@ -20,6 +20,33 @@ type SemesterTabProps = {
 function SemesterTab({ data, dispatch, index, activeSemester, setActiveSemester }: SemesterTabProps) {
     const ref = useRef<null | HTMLDivElement>(null);
 
+    /// EXPERIMENTAL
+    // const obeserver_options = {
+    //     rootMargin: '0px',
+    //     threshold: 0.95
+    // };
+
+    // const callback: IntersectionObserverCallback = (entries) => {
+    //     entries.forEach((entry) => {
+    //         console.log(entry.target.innerHTML, entry.intersectionRatio);
+    //         if (entry.target === ref.current) {
+    //             if (entry.intersectionRect.left < window.innerWidth / 2 - ref.current!.clientWidth)
+    //                 return;
+    //             if (entry.intersectionRect.left > window.innerWidth / 2 + ref.current!.clientWidth)
+    //                 return;
+    //             if (entry.intersectionRatio >= 0.95 && entry.intersectionRect.left ) {
+    //                 handleClick();
+    //             }
+    //         }
+    //     })
+    // }
+
+    // const observer = new IntersectionObserver(callback, obeserver_options)
+
+    // useEffect(() => {
+    //     observer.observe(ref.current! as Element)
+    // }, [ref]);
+
     const handleClick = () => {
         setActiveSemester(index);
         console.log(index);
@@ -28,7 +55,11 @@ function SemesterTab({ data, dispatch, index, activeSemester, setActiveSemester 
     const [options, setOptions] = useState(false);
 
     const long_press_attrs = useLongPress(
-        () => setOptions(!options)
+        () => {
+            if (activeSemester === index) {
+                setOptions(!options)
+            }
+        }
     );
 
     const handle_delete = () => {
@@ -54,12 +85,12 @@ function SemesterTab({ data, dispatch, index, activeSemester, setActiveSemester 
         if (index === activeSemester) {
             ref.current!.scrollIntoView({ behavior: "smooth", inline: "center" });
         }
+        setOptions(false);
     }, [activeSemester]);
 
     return (
         <div className="py-8 h-32 snap-center min-w-60 flex flex-col justify-center items-center"
-            ref={ref} 
-            >
+            ref={ref}>
             <button 
                 {...long_press_attrs} 
                 className={clsx("w-full flex-column align-middle font-cmu", {
@@ -113,10 +144,7 @@ export function AddSemesterButton({ data, dispatch, activeSemester }: AddSemeste
 
     return (
         <button
-            className={clsx("relative text-whiteish text-3xl px-4", {
-                "opacity-50": activeSemester === Object.keys(data.semesters).length - 1,
-                "opacity-0": activeSemester !== Object.keys(data.semesters).length - 1,
-            })}
+            className="relative text-whiteish text-3xl px-4 opacity-50"
             onClick={handleClick}>
             Add
         </button>
@@ -134,7 +162,9 @@ export type SemesterBarProps = {
 
 export function SemesterBar({ data, activeSemester, setActiveSemester, dispatch }: SemesterBarProps) {
   return (
-    <div className="relative bg-greyblue flex-shrink-0 px-8 overflow-x-scroll snap-x snap-proximity touch-none no-scrollbar">
+    <div 
+        className="relative bg-greyblue flex-shrink-0 px-8 overflow-x-scroll snap-x snap-always snap-mandatory no-scrollbar"
+        onScroll={() => {setActiveSemester(activeSemester)}}>
         <div className="relative flex">
             <div className="relative min-w-full snap-none"></div>
             {
