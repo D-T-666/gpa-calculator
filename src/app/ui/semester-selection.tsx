@@ -1,28 +1,45 @@
 'use client';
 
 import clsx from "clsx";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { semester_GPA, in_range_or_equal_string } from "../lib/calculations";
 import { CourseDict, UserData } from "../lib/definitions";
 
 import cs_data_ from "../lib/cs.json";
+import { useLongPress } from "@uidotdev/usehooks";
 const cs_data = cs_data_ as CourseDict;
 
 type SemesterTabProps = {
     data: UserData;
+    dispatch: Function;
     index: number;
     activeSemester: number;
     setActiveSemester: Function;
 };
 
-function SemesterTab({ data, index, activeSemester, setActiveSemester }: SemesterTabProps) {
-    const ref = useRef<null | HTMLButtonElement>(null);
+function SemesterTab({ data, dispatch, index, activeSemester, setActiveSemester }: SemesterTabProps) {
+    const ref = useRef<null | HTMLDivElement>(null);
 
     const handleClick = () => {
-        ref.current?.scrollIntoView({ behavior: 'smooth', inline: "center" });
         setActiveSemester(index);
         console.log(index);
     };
+
+    const [options, setOptions] = useState(false);
+
+    const long_press_attrs = useLongPress(
+        () => setOptions(!options)
+    );
+
+    const handle_delete = () => {
+        if (activeSemester === index) {
+            setActiveSemester(index - 1);
+        }
+        dispatch({
+            type: "delete semester",
+            semester: index
+        });
+    }
 
     const points_range_string = useMemo(() => {
             return in_range_or_equal_string(
@@ -35,23 +52,47 @@ function SemesterTab({ data, index, activeSemester, setActiveSemester }: Semeste
 
     useEffect(() => {
         if (index === activeSemester) {
-            ref.current!.scrollIntoView({ inline: "center" });
+            ref.current!.scrollIntoView({ behavior: "smooth", inline: "center" });
         }
-    }, []);
+    }, [activeSemester]);
 
     return (
-        <button ref={ref} className={clsx("flex-column snap-center align-middle py-8 font-cmu", {
-            "opacity-50": activeSemester !== index
-        })} onClick={handleClick}>
-            <div className={clsx("min-w-60 text-4xl", {
-                "underline text-center": activeSemester === index
+        <div className="py-8 h-32 snap-center min-w-60 flex flex-col justify-center items-center"
+            ref={ref} 
+            >
+            <button 
+                {...long_press_attrs} 
+                className={clsx("w-full flex-column align-middle font-cmu", {
+                    "hidden": options,
+                    "opacity-50": activeSemester !== index
+                })} 
+                onClick={handleClick}>
+
+                <div className={clsx("relative text-4xl", { "underline text-center": activeSemester === index })}>
+                    Semester {index + 1}
+                </div>
+
+                <div className="text-2xl opacity-50 text-center">
+                    GPA {points_range_string}
+                </div>
+            </button>
+            <div className={clsx("flex text-xl justify-center space-x-2 items-center border border-whiteish rounded-2xl p-2 w-fit", {
+                "hidden": !options,
             })}>
-                Semester {index + 1}
+
+                <button 
+                    className="font-cmu text-center w-20 rounded-xl font-bold h-12"
+                    onClick={() => setOptions(!options)}>
+                    Cancel
+                </button>
+
+                <button 
+                    className="font-cmu text-center w-20 rounded-xl font-bold bg-redish h-12"
+                    onClick={() => handle_delete()}>
+                    Delete
+                </button>
             </div>
-            <div className="text-2xl opacity-50 text-center">
-                GPA {points_range_string}
-            </div>
-        </button>
+        </div>
     )
 }
 
@@ -99,7 +140,7 @@ export function SemesterBar({ data, activeSemester, setActiveSemester, dispatch 
             {
                 Object.keys(data.semesters).map((_, index) => (
                     <SemesterTab 
-                        {...{data, index, activeSemester, setActiveSemester}}
+                        {...{data, dispatch, index, activeSemester, setActiveSemester}}
                         key={index} />
                 ))
             }

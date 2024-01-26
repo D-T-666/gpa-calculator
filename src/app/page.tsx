@@ -98,6 +98,16 @@ const reducer = (data: UserData, action: DataUpdateAction): UserData => {
       }
       break;
     }
+    case "delete semester": {
+      console.log("Deleting semester", action.semester);
+      let { [action.semester]: _, ...semesters } = data.semesters;
+      res = {
+        ...data,
+        semesters: semesters
+      }
+      console.log("result: ", res)
+      break;
+    }
     case "add course": {
       let curriculum = undefined;
       let temp = {
