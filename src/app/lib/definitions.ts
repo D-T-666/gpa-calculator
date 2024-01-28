@@ -11,7 +11,7 @@ export type GradeGroup = {
     };
 };
 
-export type Curriculum = {
+export type Syllabus = {
     [name: string]: GradeGroup;
 };
 
@@ -19,7 +19,7 @@ export type Course = {
     credits: number;
     parity: "fall" | "spring";
     pre_requisites?: string[];
-    curriculum?: Curriculum;
+    syllabus?: Syllabus;
 };
 
 export type CourseDict = {
@@ -27,14 +27,14 @@ export type CourseDict = {
 };
 
 // User dependent data
-export type UserCurriculumData = {
+export type UserSyllabusData = {
     [group_name: string]: {
         [item_name: string]: number | null;
     }
 }
 export type UserCourseData = {
     mode: "total" | "continuous";
-    curriculum?: UserCurriculumData;
+    syllabus?: UserSyllabusData;
     total?: number;
 };
 

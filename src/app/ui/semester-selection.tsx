@@ -56,20 +56,21 @@ function SemesterTab({ data, dispatch, index, activeSemester, setActiveSemester 
 
     const long_press_attrs = useLongPress(
         () => {
-            if (activeSemester === index) {
+            if (activeSemester === index && index === Object.keys(data.semesters).length - 1) {
                 setOptions(!options)
             }
         }
     );
 
     const handle_delete = () => {
-        if (activeSemester === index) {
+        if (activeSemester > 0 && activeSemester === index) {
             setActiveSemester(index - 1);
         }
         dispatch({
             type: "delete semester",
             semester: index
         });
+        setOptions(false);
     }
 
     const points_range_string = useMemo(() => {
@@ -77,7 +78,7 @@ function SemesterTab({ data, dispatch, index, activeSemester, setActiveSemester 
                 Math.round((semester_GPA(data.semesters[index], cs_data, false) + Number.EPSILON) * 100) / 100,
                 Math.round((semester_GPA(data.semesters[index], cs_data, true) + Number.EPSILON) * 100) / 100
             ) || 0
-        }, 
+        },
         [data, index]
     );
 
@@ -91,12 +92,12 @@ function SemesterTab({ data, dispatch, index, activeSemester, setActiveSemester 
     return (
         <div className="py-8 h-32 snap-center min-w-60 flex flex-col justify-center items-center"
             ref={ref}>
-            <button 
-                {...long_press_attrs} 
+            <button
+                {...long_press_attrs}
                 className={clsx("w-full flex-column align-middle font-cmu", {
                     "hidden": options,
                     "opacity-50": activeSemester !== index
-                })} 
+                })}
                 onClick={handleClick}>
 
                 <div className={clsx("relative text-4xl", { "underline text-center": activeSemester === index })}>
@@ -111,13 +112,13 @@ function SemesterTab({ data, dispatch, index, activeSemester, setActiveSemester 
                 "hidden": !options,
             })}>
 
-                <button 
+                <button
                     className="font-cmu text-center w-20 rounded-xl font-bold h-12"
                     onClick={() => setOptions(!options)}>
                     Cancel
                 </button>
 
-                <button 
+                <button
                     className="font-cmu text-center w-20 rounded-xl font-bold bg-redish h-12"
                     onClick={() => handle_delete()}>
                     Delete
@@ -127,7 +128,7 @@ function SemesterTab({ data, dispatch, index, activeSemester, setActiveSemester 
     )
 }
 
-// 
+//
 
 export type AddSemesterButtonProps = {
     data: UserData;
@@ -162,14 +163,12 @@ export type SemesterBarProps = {
 
 export function SemesterBar({ data, activeSemester, setActiveSemester, dispatch }: SemesterBarProps) {
   return (
-    <div 
-        className="relative bg-greyblue flex-shrink-0 px-8 overflow-x-scroll snap-x snap-always snap-mandatory no-scrollbar"
-        onScroll={() => {setActiveSemester(activeSemester)}}>
+    <div className="relative bg-greyblue flex-shrink-0 px-8 overflow-x-scroll snap-x snap-always snap-mandatory no-scrollbar">
         <div className="relative flex">
             <div className="relative min-w-full snap-none"></div>
             {
                 Object.keys(data.semesters).map((_, index) => (
-                    <SemesterTab 
+                    <SemesterTab
                         {...{data, dispatch, index, activeSemester, setActiveSemester}}
                         key={index} />
                 ))

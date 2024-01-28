@@ -3,7 +3,7 @@
 import CardList from "./ui/card-list";
 import { SemesterBar } from "./ui/semester-selection";
 import { useReducer, useState } from "react";
-import { CourseDict, DataUpdateAction, UserCourseData, UserCurriculumData, UserData } from "./lib/definitions";
+import { CourseDict, DataUpdateAction, UserCourseData, UserSyllabusData, UserData } from "./lib/definitions";
 import { course_points } from "./lib/calculations";
 
 import cs_data_ from "./lib/cs.json";
@@ -11,7 +11,7 @@ const cs_data = cs_data_ as CourseDict;
 
 import Header from "./ui/header";
 
-const reducer = (data: UserData, action: DataUpdateAction): UserData => {
+function reducer(data: UserData, action: DataUpdateAction): UserData {
   console.log("Reducer fired", action);
 
   let res = data;
@@ -25,10 +25,10 @@ const reducer = (data: UserData, action: DataUpdateAction): UserData => {
             ...data.semesters[action.semester],
             [action.course]: {
               ...data.semesters[action.semester][action.course],
-              curriculum: {
-                ...data.semesters[action.semester][action.course].curriculum,
+              syllabus: {
+                ...data.semesters[action.semester][action.course].syllabus,
                 [action.group]: {
-                  ...data.semesters[action.semester][action.course].curriculum![action.group],
+                  ...data.semesters[action.semester][action.course].syllabus![action.group],
                   [action.item]: action.points
                 }
               },
@@ -55,6 +55,7 @@ const reducer = (data: UserData, action: DataUpdateAction): UserData => {
       break;
     }
     case "convert to total": {
+      console.log(data.semesters[action.semester][action.course]);
       res = {
         ...data,
         semesters: {
@@ -64,7 +65,7 @@ const reducer = (data: UserData, action: DataUpdateAction): UserData => {
             [action.course]: {
               ...data.semesters[action.semester][action.course],
               mode: "total",
-              total: course_points(data.semesters[action.semester][action.course].curriculum!, cs_data[action.course].curriculum!)
+              total: course_points(data.semesters[action.semester][action.course].syllabus!, cs_data[action.course].syllabus!)
             }
           }
         }
@@ -81,7 +82,7 @@ const reducer = (data: UserData, action: DataUpdateAction): UserData => {
             [action.course]: {
               ...data.semesters[action.semester][action.course],
               mode: "continuous",
-              total: course_points(data.semesters[action.semester][action.course].curriculum!, cs_data[action.course].curriculum!)
+              total: course_points(data.semesters[action.semester][action.course].syllabus!, cs_data[action.course].syllabus!)
             }
           }
         }
@@ -100,26 +101,36 @@ const reducer = (data: UserData, action: DataUpdateAction): UserData => {
     }
     case "delete semester": {
       console.log("Deleting semester", action.semester);
-      let { [action.semester]: _, ...semesters } = data.semesters;
-      res = {
-        ...data,
-        semesters: semesters
+      console.log("before: ", data);
+      if (action.semester > 0 && action.semester == Object.keys(data.semesters).length - 1) {
+        let { [action.semester]: _, ...semesters } = data.semesters;
+        res = {
+          ...data,
+          semesters: semesters
+        }
+      } else {
+        res = {
+          ...data,
+          semesters: {
+            "0": {}
+          }
+        }
       }
-      console.log("result: ", res)
+      console.log("result: ", res);
       break;
     }
     case "add course": {
-      let curriculum = undefined;
+      let syllabus = undefined;
       let temp = {
-        mode: curriculum !== undefined ? "continuous" : "total"
+        mode: syllabus !== undefined ? "continuous" : "total"
       } as UserCourseData;
 
-      if (cs_data[action.course].curriculum !== undefined) {
-        temp.curriculum = {} as UserCurriculumData;
-        for (let [group_name, group_data] of Object.entries(cs_data[action.course].curriculum!)) {
-          temp.curriculum[group_name] = {};
+      if (cs_data[action.course].syllabus !== undefined) {
+        temp.syllabus = {} as UserSyllabusData;
+        for (let [group_name, group_data] of Object.entries(cs_data[action.course].syllabus!)) {
+          temp.syllabus[group_name] = {};
           for (let item of Object.keys(group_data.items)) {
-            temp.curriculum[group_name][item] = null;
+            temp.syllabus[group_name][item] = null;
           }
         }
       } else {
@@ -137,7 +148,7 @@ const reducer = (data: UserData, action: DataUpdateAction): UserData => {
         }
       };
 
-      console.log(res);
+      console.log("Added course.", res);
       break;
     }
     case "delete course": {
@@ -173,17 +184,17 @@ export default function Home() {
       }
     }
   } as UserData;
-  
+
   let saved_data = null;
-  if (typeof window !== "undefined") {
-    saved_data = window.localStorage.getItem("data");
-    if (saved_data !== null) {
-      saved_data = JSON.parse(saved_data) as UserData;
-      if (saved_data.version !== default_data.version) {
-        saved_data = null;
-      }
-    }
-  }
+  // if (typeof window !== "undefined") {
+  //   saved_data = window.localStorage.getItem("data");
+  //   if (saved_data !== null) {
+  //     saved_data = JSON.parse(saved_data) as UserData;
+  //     if (saved_data.version !== default_data.version) {
+  //       saved_data = null;
+  //     }
+  //   }
+  // }
 
   const [data, dispatch] = useReducer(reducer, (saved_data !== null ? saved_data : default_data) );
 
@@ -192,10 +203,10 @@ export default function Home() {
   return (
     <main className="bg-greyblue h-screen font-serif flex flex-col">
       <Header data={data}/>
-      
+
       <SemesterBar
-        activeSemester={semester} 
-        data={data} 
+        activeSemester={semester}
+        data={data}
         dispatch={dispatch}
         setActiveSemester={(s: number) => {
           console.log(s); setSemester(s)

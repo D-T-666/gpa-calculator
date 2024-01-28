@@ -12,12 +12,12 @@ const cs_data = cs_data_ as CourseDict;
 
 export default function GradeGroup({ data, sem, course, group, dispatch }: { data: UserData, sem: number, course: string, group: string, dispatch: Function }) {
   const [unfolded, setUnfolded] = useState(false);
-  
-  const points_range_string = useMemo(() => 
+
+  const points_range_string = useMemo(() =>
     in_range_or_equal_string(
-        grade_group_points(data.semesters[sem][course].curriculum![group], cs_data[course].curriculum![group], false),
-        grade_group_points(data.semesters[sem][course].curriculum![group], cs_data[course].curriculum![group], true)
-    ), 
+        grade_group_points(data.semesters[sem][course].syllabus![group], cs_data[course].syllabus![group], false),
+        grade_group_points(data.semesters[sem][course].syllabus![group], cs_data[course].syllabus![group], true)
+    ),
     [data, sem, course, group]
   );
 
@@ -47,7 +47,7 @@ export default function GradeGroup({ data, sem, course, group, dispatch }: { dat
                 </div>
                 <hr className="border-brownish"/>
                 {
-                    Object.keys(data.semesters[sem][course].curriculum![group]).map((item, index) => 
+                    Object.keys(data.semesters[sem][course].syllabus![group]).map((item, index) =>
                         <GradedEvent {...{data, sem, course, group, dispatch, item}} key={index} />
                     )
                 }

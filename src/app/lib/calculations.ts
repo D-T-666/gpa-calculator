@@ -1,4 +1,4 @@
-import { Course, CourseDict, Curriculum, GradeGroup, UserCourseData, UserCurriculumData, UserData, UserSemesterData } from "./definitions";
+import { Course, CourseDict, Syllabus, GradeGroup, UserCourseData, UserSyllabusData, UserData, UserSemesterData } from "./definitions";
 
 export function points_to_GP(points: number): number {
     if (points < 51) return 0;
@@ -27,15 +27,15 @@ export function grade_group_points(user_data: { [item_name: string]: number | nu
         .reduce((a, v) => a + v);
 }
 
-export function course_points(user_course: UserCurriculumData, curriculum: Curriculum, max: boolean = false): number {
+export function course_points(user_course: UserSyllabusData, syllabus: Syllabus, max: boolean = false): number {
     let points = 0;
     for (let group_name of Object.keys(user_course)) {
-        points += grade_group_points(user_course[group_name], curriculum[group_name], max);
+        points += grade_group_points(user_course[group_name], syllabus[group_name], max);
     }
     return points;
 }
 
-export function course_GP(user_course: UserCurriculumData, course_curruculum: Curriculum, max: boolean = false): number {
+export function course_GP(user_course: UserSyllabusData, course_curruculum: Syllabus, max: boolean = false): number {
     return points_to_GP(course_points(user_course, course_curruculum, max));
 }
 
@@ -57,7 +57,7 @@ export function semester_GPA(user_semester: UserSemesterData, courses: CourseDic
         if (user_semester[course_name].mode === "total") {
             acc += courses[course_name].credits * points_to_GP(user_semester[course_name].total!);
         } else {
-            acc += courses[course_name].credits * points_to_GP(course_points(user_semester[course_name].curriculum!, courses[course_name].curriculum!, max));
+            acc += courses[course_name].credits * points_to_GP(course_points(user_semester[course_name].syllabus!, courses[course_name].syllabus!, max));
         }
         total_credits += courses[course_name].credits;
     }
@@ -88,7 +88,7 @@ export function in_range_or_equal_string(a: number, b: number): string {
         a = t;
     }
 
-    return a !== b 
+    return a !== b
         ? `∈ [${a}, ${b}]`
         : `= ${a}`
 }
@@ -101,8 +101,8 @@ export function available_courses(user_data: UserData, semester: number, courses
         for (let [course, course_data] of Object.entries(sem_data)) {
             let points = course_data.mode === "total"
                 ? course_data.total!
-                : course_points(course_data.curriculum!, courses[course].curriculum!);
-            
+                : course_points(course_data.syllabus!, courses[course].syllabus!);
+
             if (points > 50 && Number(sem) < semester) {
                 completed.push(course);
             }
@@ -120,7 +120,7 @@ export function available_courses(user_data: UserData, semester: number, courses
     let available = [];
 
     for (let [course, course_data] of Object.entries(courses)) {
-        if ((course_data.parity === "fall") === (semester % 2 !== 0)) 
+        if ((course_data.parity === "fall") === (semester % 2 !== 0))
             continue;
 
         if (course_data.credits > available_credits)

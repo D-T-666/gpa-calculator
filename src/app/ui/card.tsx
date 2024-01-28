@@ -29,7 +29,7 @@ export default function Card({ data, sem, course, dispatch }: { course: string; 
 	const delete_handler = () => {
 		dispatch({
 			type: "delete course",
-			semester: sem, 
+			semester: sem,
 			course: course
 		});
 	};
@@ -40,7 +40,7 @@ export default function Card({ data, sem, course, dispatch }: { course: string; 
 				<h1 className="mb-2 text-3xl flex-grow">
 					{course}
 				</h1>
-				<button 
+				<button
 					className="w-6 h-10 min-w-6 min-h-10 -rotate-90 text-4xl float-right align-middle text-brownish"
 					onClick={() => setSettings(!settings)}>
 					...
@@ -48,14 +48,14 @@ export default function Card({ data, sem, course, dispatch }: { course: string; 
 			</div>
 
 			<CardOptions toggled={settings} delete_handler={delete_handler}/>
-			
+
 			{ // If there's no data for continuous assessment, then there shouldn't be a switch.
-			cs_data[course].curriculum !== undefined && <TypeSwitch {...{data, sem, course, dispatch}} /> 
+			cs_data[course].syllabus !== undefined && <TypeSwitch {...{data, sem, course, dispatch}} />
 			}
 
 			{ data.semesters[sem][course].mode === "continuous"
-				?   <div className="pb-4"> 
-						{ Object.keys(data.semesters[sem][course].curriculum!).map((group, i) => 
+				?   <div className="pb-4">
+						{ Object.keys(data.semesters[sem][course].syllabus!).map((group, i) =>
 							<GradeGroup {...{data, sem, course, group, dispatch}} key={i}/>
 						) }
 					</div>
