@@ -23,11 +23,11 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#191d20"
      inkscape:document-units="mm"
-     inkscape:zoom="1.637542"
-     inkscape:cx="375.86823"
-     inkscape:cy="221.36837"
+     inkscape:zoom="0.96170896"
+     inkscape:cx="267.23261"
+     inkscape:cy="467.39712"
      inkscape:window-width="1680"
-     inkscape:window-height="1050"
+     inkscape:window-height="1022"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -47,55 +47,116 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <rect
-       style="fill:#363e45;fill-opacity:1;stroke:#adadad;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;paint-order:markers stroke fill;stroke-dasharray:none;stroke-opacity:1"
-       id="rect1-9"
-       width="93.282341"
-       height="93.282341"
-       x="52.734238"
-       y="21.007792"
-       ry="21.440044"
-       inkscape:export-filename="gpa-calculator-logo.png"
-       inkscape:export-xdpi="137.93465"
-       inkscape:export-ydpi="137.93465" />
-    <rect
-       style="fill:#fffcf5;fill-opacity:1;stroke:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;paint-order:markers stroke fill"
-       id="rect1"
-       width="86.173111"
-       height="86.173111"
-       x="56.288853"
-       y="24.562407"
-       ry="19.806055" />
     <text
        xml:space="preserve"
        transform="scale(0.26458333)"
        id="text1"
        style="font-size:40px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif';white-space:pre;shape-inside:url(#rect2);display:inline" />
     <g
+       id="g7">
+      <rect
+         style="fill:#363e45;fill-opacity:1;stroke:#adadad;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+         id="rect1-9"
+         width="93.282341"
+         height="93.282341"
+         x="52.734238"
+         y="21.007792"
+         ry="21.440044"
+         inkscape:export-filename="public/icons/512.png"
+         inkscape:export-xdpi="137.93465"
+         inkscape:export-ydpi="137.93465" />
+      <rect
+         style="fill:#fffcf5;fill-opacity:1;stroke:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;paint-order:markers stroke fill"
+         id="rect1"
+         width="86.173111"
+         height="86.173111"
+         x="56.288853"
+         y="24.562407"
+         ry="19.806055" />
+      <g
+         id="g1"
+         transform="matrix(0.93187461,0,0,0.93187461,6.7686261,5.9036222)">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:27.1661px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif Bold';stroke-width:0.679152"
+           x="65.968262"
+           y="80.701241"
+           id="text3"><tspan
+             sodipodi:role="line"
+             id="tspan3"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif Bold';stroke-width:0.679152"
+             x="65.968262"
+             y="80.701241">GPA</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:30.1935px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif Bold';stroke-width:0.754837"
+           x="65.850006"
+           y="54.326347"
+           id="text3-8"><tspan
+             sodipodi:role="line"
+             id="tspan3-3"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif Bold';stroke-width:0.754837"
+             x="65.850006"
+             y="54.326347">KIU</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:15.3634px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif';fill:#a9a39b;fill-opacity:1;stroke-width:0.384293;stroke-dasharray:none"
+           x="66.464348"
+           y="98.733475"
+           id="text4"><tspan
+             sodipodi:role="line"
+             id="tspan4"
+             style="fill:#a9a39b;fill-opacity:1;stroke-width:0.384293;stroke-dasharray:none"
+             x="66.464348"
+             y="98.733475">calculator</tspan></text>
+      </g>
+    </g>
+    <g
        id="g4"
-       transform="matrix(0.96073128,0,0,0.96073128,3.9023435,1.6366707)">
-      <text
-         xml:space="preserve"
-         style="font-size:33.0119px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif';stroke-width:0.825298"
-         x="63.832809"
-         y="71.768257"
-         id="text3"><tspan
-           sodipodi:role="line"
-           id="tspan3"
-           style="stroke-width:0.825298"
-           x="63.832809"
-           y="71.768257">GPA</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-size:15.9914px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif';fill:#a9a39b;fill-opacity:1;stroke-width:0.4;stroke-dasharray:none"
-         x="65.139915"
-         y="89.103668"
-         id="text4"><tspan
-           sodipodi:role="line"
-           id="tspan4"
-           style="fill:#a9a39b;fill-opacity:1;stroke-width:0.4;stroke-dasharray:none"
-           x="65.139915"
-           y="89.103668">calculator</tspan></text>
+       transform="translate(4.8960936,-0.27511788)">
+      <g
+         id="g6">
+        <rect
+           style="fill:#fffcf5;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;paint-order:markers stroke fill"
+           id="rect3"
+           width="99.816681"
+           height="99.816681"
+           x="44.550945"
+           y="126.8856" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:30.2692px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif Bold';stroke-width:0.756729"
+           x="56.859264"
+           y="187.19159"
+           id="text3-7"><tspan
+             sodipodi:role="line"
+             id="tspan3-9"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif Bold';stroke-width:0.756729"
+             x="56.859264"
+             y="187.19159">GPA</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.3508px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif Bold';fill:#363e45;fill-opacity:1;stroke-width:0.434;stroke-dasharray:none"
+           x="75.193748"
+           y="159.61031"
+           id="text3-8-4"><tspan
+             sodipodi:role="line"
+             id="tspan3-3-1"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif Bold';fill:#363e45;fill-opacity:1;stroke-width:0.434;stroke-dasharray:none"
+             x="75.193748"
+             y="159.61031">KIU</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:11.2648px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif';fill:#a9a39b;fill-opacity:1;stroke-width:0.281773;stroke-dasharray:none"
+           x="70.342827"
+           y="200.54045"
+           id="text4-6"><tspan
+             sodipodi:role="line"
+             id="tspan4-1"
+             style="fill:#363e45;fill-opacity:1;stroke-width:0.281773;stroke-dasharray:none"
+             x="70.342827"
+             y="200.54045">calculator</tspan></text>
+      </g>
     </g>
   </g>
 </svg>
