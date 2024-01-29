@@ -17,7 +17,7 @@ export function points_to_GP(points: number): number {
     else return 4.0;
 }
 
-export function grade_group_points(user_data: { [item_name: string]: number | null }, group_data: GradeGroup, max: boolean = false): number {
+export function grade_group_points(user_data: { [item_name: string]: number | undefined }, group_data: GradeGroup, max: boolean = false): number {
 
     return Object
         .entries(user_data)
