@@ -42,15 +42,13 @@ export default function GradeGroup({ data, sem, course, group, dispatch }: { dat
             </div>
         </div>
 
-
-
         <div className={clsx("transition-all duration-500", {"opacity-100 max-h-[100em]": unfolded, "opacity-0 max-h-[0em]": !unfolded})}>
         {
             unfolded ? <>
                 { // Information about dropped items
                   cs_data[course].syllabus![group].drop > 0 &&
                   <div className="p-2 pb-0 text-brownish text-center">
-                    {cs_data[course].syllabus![group].drop} items get dropped.
+                    {cs_data[course].syllabus![group].drop} item{cs_data[course].syllabus![group].drop > 1 && "s"} get{cs_data[course].syllabus![group].drop === 1 && "s"} dropped.
                   </div>
                 }
                 <hr className="border-brownish mx-4 mt-4"/>
