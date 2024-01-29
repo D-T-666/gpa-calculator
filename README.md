@@ -10,10 +10,8 @@ total points             |  continuous assesment
 
 - [x] calculate GPA for every plausible configuration of courses.
 - [x] filter out courses that can not be taken yet due to them having pre-requisites.
-- [ ] track continuous assessment points for every course.
-- [ ] save entered points to `localStorage`.
+- [x] track continuous assessment points for every course.
+- [x] save entered points to `localStorage`.
+- [ ] pick majors and minors.
 - [ ] * sync data across multiple devices through a server.
 - [ ] * store data in a database (as privately as possible).
-
-
-
