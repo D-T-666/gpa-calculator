@@ -4,6 +4,7 @@ import { ChangeEvent } from "react";
 import { CourseDict, UserData } from "../lib/definitions";
 
 import cs_data_ from "../lib/cs.json";
+import NumberInput from "./number-input";
 const cs_data = cs_data_ as CourseDict;
 
 export type GradedEventProps = {
@@ -17,14 +18,14 @@ export type GradedEventProps = {
 
 
 export default function GradedEvent({ data, sem, course, group, item, dispatch }: GradedEventProps) {
-  const change_handler = (e: ChangeEvent<HTMLInputElement>) => {
+  const change_handler = (x: number | null) => {
     dispatch({
       semester: sem,
       course: course,
       group: group,
       item: item,
       type: "update continuous points",
-      points: Number(e.target.value) || null
+      points: x
     });
   };
 
@@ -33,11 +34,10 @@ export default function GradedEvent({ data, sem, course, group, item, dispatch }
       <div className="font-cmu flex-grow">
         {item}
       </div>
-      <input
-        className="shadow-[inset_0_0_8px_0_rgba(0,0,0,0.1)] w-10 h-8 pt-1 -translate-y-0.5 rounded-lg text-right px-1 bg-whiteish font-normal"
-        type="number"
-        value={data.semesters[sem][course].syllabus![group][item] || ""}
-        onChange={change_handler}
+      <NumberInput
+        className="w-10 h-8 pt-1 -translate-y-0.5 rounded-lg text-right px-1 bg-whiteish font-normal"
+        value={data.semesters[sem][course].syllabus![group][item] !== undefined ? data.semesters[sem][course].syllabus![group][item] : ""}
+        setValue={change_handler}
         min={0}
         max={cs_data[course].syllabus![group].items[item].max_points}
       />

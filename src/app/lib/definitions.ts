@@ -30,7 +30,7 @@ export type CourseDict = {
 // User dependent data
 export type UserSyllabusData = {
     [group_name: string]: {
-        [item_name: string]: number | null;
+        [item_name: string]: number;
     }
 }
 export type UserCourseData = {

@@ -124,9 +124,6 @@ function reducer(data: UserData, action: DataUpdateAction): UserData {
         temp.syllabus = {} as UserSyllabusData;
         for (let [group_name, group_data] of Object.entries(cs_data[action.course].syllabus!)) {
           temp.syllabus[group_name] = {};
-          for (let item of Object.keys(group_data.items)) {
-            temp.syllabus[group_name][item] = null;
-          }
         }
       } else {
         temp.total = 0;
