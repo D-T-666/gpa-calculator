@@ -23,8 +23,8 @@ export default function GradeGroup({ data, sem, course, group, dispatch }: { dat
 
   return (
     <div className="relative my-4 flex-column font-normal">
-        <div className="relative flex">
-            <button className={clsx("relative w-6 ml-4 text-brownish text-center transition", {
+        <div className="relative flex items-center">
+            <button className={clsx("relative w-4 h-4 text-brownish text-center transition", {
                 "-rotate-90": !unfolded
             })} onClick={() => setUnfolded(!unfolded)}>
                 <Image
@@ -34,23 +34,32 @@ export default function GradeGroup({ data, sem, course, group, dispatch }: { dat
                     fill={true}
                 />
             </button>
-            <label className="relative text-3xl flex-grow text-center font-cmu">
+            <label className="relative text-2xl flex-grow ml-4 font-cmu">
                 {group}
             </label>
-            <div className="relative w-6 mr-4"></div>
+            <div className="relative w-fit text-right text-brownish font-cmu">
+              {points_range_string}
+            </div>
         </div>
-        <div className={clsx("transition-all duration-500", {"opacity-100 max-h-[200em]": unfolded, "opacity-0 max-h-[0em]": !unfolded})}>
+
+
+
+        <div className={clsx("transition-all duration-500", {"opacity-100 max-h-[100em]": unfolded, "opacity-0 max-h-[0em]": !unfolded})}>
         {
             unfolded ? <>
-                <div className="text-center duration text-brownish w-full text-xl my-1 font-cmu">
-                    total {points_range_string}
-                </div>
-                <hr className="border-brownish"/>
+                { // Information about dropped items
+                  cs_data[course].syllabus![group].drop > 0 &&
+                  <div className="p-2 pb-0 text-brownish text-center">
+                    {cs_data[course].syllabus![group].drop} items get dropped.
+                  </div>
+                }
+                <hr className="border-brownish mx-4 mt-4"/>
                 {
                     Object.keys(data.semesters[sem][course].syllabus![group]).map((item, index) =>
                         <GradedEvent {...{data, sem, course, group, dispatch, item}} key={index} />
                     )
                 }
+                <div className="mb-8"></div>
             </> : null
         }
         </div>

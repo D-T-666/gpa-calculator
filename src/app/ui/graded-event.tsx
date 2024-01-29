@@ -29,12 +29,12 @@ export default function GradedEvent({ data, sem, course, group, item, dispatch }
   };
 
   return (
-    <div className="relative my-4 flex text text-3xl pl-2 pr-6 items-center">
+    <div className="relative my-4 flex text text-xl pl-2 pr-6 items-center">
       <div className="font-cmu flex-grow">
         {item}
       </div>
       <input
-        className="shadow-[inset_0_0_8px_0_rgba(0,0,0,0.1)] w-12 h-10 pt-1 -translate-y-0.5 rounded-lg text-right px-1 bg-whiteish font-normal"
+        className="shadow-[inset_0_0_8px_0_rgba(0,0,0,0.1)] w-10 h-8 pt-1 -translate-y-0.5 rounded-lg text-right px-1 bg-whiteish font-normal"
         type="number"
         value={data.semesters[sem][course].syllabus![group][item] || ""}
         onChange={change_handler}
