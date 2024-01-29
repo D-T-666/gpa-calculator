@@ -1,6 +1,5 @@
 'use client';
 
-import { ChangeEvent } from "react";
 import { CourseDict, UserData } from "../lib/definitions";
 
 import cs_data_ from "../lib/cs.json";

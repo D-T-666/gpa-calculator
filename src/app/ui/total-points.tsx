@@ -1,12 +1,9 @@
 'use client';
 
-import { ChangeEvent } from "react";
-import { course_GP, points_to_GP } from "../lib/calculations";
-import { CourseDict, UserData } from "../lib/definitions";
+import { points_to_GP } from "../lib/calculations";
+import { UserData } from "../lib/definitions";
 
-import cs_data_ from "../lib/cs.json";
 import NumberInput from "./number-input";
-const cs_data = cs_data_ as CourseDict;
 
 export default function TotalPoints({ data, sem, course, dispatch }: { data: UserData, sem: number, course: string, dispatch: Function }) {
     const change_handler = (x: number | null) => {
@@ -28,7 +25,7 @@ export default function TotalPoints({ data, sem, course, dispatch }: { data: Use
                 max={100}
             />
             <div className="text-brownish text-lg">
-              GPA = { points_to_GP(data.semesters[sem][course].total!) }
+              GPA = { data.semesters[sem][course].total ? points_to_GP(data.semesters[sem][course].total!) : "unknown" }
             </div>
         </div>
     );

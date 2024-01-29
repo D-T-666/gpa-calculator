@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 export type NumberInputProps = {
     value: number | string | undefined,
@@ -44,9 +44,9 @@ export default function NumberInput({ value, setValue, className, min, max }: Nu
 
     return (
           <input
-            className={clsx(className, {
-              "border-redish border shadow-[inset_0_0_8px_0_rgba(255,0,0,0.6)]": !valid,
-              "bg-whiteish shadow-[inset_0_0_8px_0_rgba(0,0,0,0.1)]": valid
+            className={clsx(`bg-transparent ${className}`, {
+              "shadow-[inset_0_0_8px_0_rgba(255,0,0,0.6)]": !valid,
+              "shadow-[inset_0_0_8px_0_rgba(0,0,0,0.1)]": valid
             })}
             type="number"
             value={value}

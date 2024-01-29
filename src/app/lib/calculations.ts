@@ -55,7 +55,11 @@ export function semester_GPA(user_semester: UserSemesterData, courses: CourseDic
 
     for (let course_name of Object.keys(user_semester)) {
         if (user_semester[course_name].mode === "total") {
-            acc += courses[course_name].credits * points_to_GP(user_semester[course_name].total!);
+            if (!user_semester[course_name].total && user_semester[course_name].total !== 0) {
+                acc += max ? courses[course_name].credits * points_to_GP(100) : 0;
+            } else {
+                acc += courses[course_name].credits * points_to_GP(user_semester[course_name].total!);
+            }
         } else {
             acc += courses[course_name].credits * points_to_GP(course_points(user_semester[course_name].syllabus!, courses[course_name].syllabus!, max));
         }
