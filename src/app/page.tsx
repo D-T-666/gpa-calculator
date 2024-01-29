@@ -172,13 +172,13 @@ export default function Home() {
     version: "0.0.3",
     semesters: { 0: {} }
   } as UserData;
-  useEffect(() => {
-    dispatch({
-      type: "add course",
-      semester: 0,
-      course: "Introduction to Databases"
-    });
-  }, []);
+  // useEffect(() => {
+  //   dispatch({
+  //     type: "add course",
+  //     semester: 0,
+  //     course: "Introduction to Databases"
+  //   });
+  // }, []);
 
   let saved_data = null;
   if (typeof window !== "undefined") {
