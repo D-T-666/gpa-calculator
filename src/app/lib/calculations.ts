@@ -123,6 +123,9 @@ export function available_courses(user_data: UserData, semester: number, courses
         if ((course_data.parity === "fall") === (semester % 2 !== 0))
             continue;
 
+        if (course_data.min_semester > semester)
+            continue;
+
         if (course_data.credits > available_credits)
             continue;
 

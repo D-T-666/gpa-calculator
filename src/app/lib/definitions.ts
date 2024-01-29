@@ -18,6 +18,7 @@ export type Syllabus = {
 export type Course = {
     credits: number;
     parity: "fall" | "spring";
+    min_semester: number;
     pre_requisites?: string[];
     syllabus?: Syllabus;
 };
