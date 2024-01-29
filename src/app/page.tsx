@@ -100,23 +100,18 @@ function reducer(data: UserData, action: DataUpdateAction): UserData {
       break;
     }
     case "delete semester": {
-      console.log("Deleting semester", action.semester);
-      console.log("before: ", data);
-      if (action.semester > 0 && action.semester == Object.keys(data.semesters).length - 1) {
-        let { [action.semester]: _, ...semesters } = data.semesters;
-        res = {
-          ...data,
-          semesters: semesters
-        }
-      } else {
-        res = {
-          ...data,
-          semesters: {
-            "0": {}
-          }
-        }
+      const last_semester = Object.keys(data.semesters).length - 1;
+
+      let { [last_semester]: _, ...semesters } = data.semesters;
+
+      if (Object.keys(semesters).length === 0) {
+        semesters = { "0": {} };
       }
-      console.log("result: ", res);
+
+      res = {
+        ...data,
+        semesters: semesters
+      }
       break;
     }
     case "add course": {

@@ -75,7 +75,6 @@ export type DataUpdateAction = {
     type: "add semester";
 } | {
     type: "delete semester";
-    semester: number;
 } | {
     type: "add course";
     semester: number;

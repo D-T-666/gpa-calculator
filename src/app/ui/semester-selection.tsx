@@ -17,61 +17,19 @@ type SemesterTabProps = {
     setActiveSemester: Function;
 };
 
-function SemesterTab({ data, dispatch, index, activeSemester, setActiveSemester }: SemesterTabProps) {
+function SemesterTab({ data, index, activeSemester, setActiveSemester }: SemesterTabProps) {
     const ref = useRef<null | HTMLDivElement>(null);
-
-    /// EXPERIMENTAL
-    // const obeserver_options = {
-    //     rootMargin: '0px',
-    //     threshold: 0.95
-    // };
-
-    // const callback: IntersectionObserverCallback = (entries) => {
-    //     entries.forEach((entry) => {
-    //         console.log(entry.target.innerHTML, entry.intersectionRatio);
-    //         if (entry.target === ref.current) {
-    //             if (entry.intersectionRect.left < window.innerWidth / 2 - ref.current!.clientWidth)
-    //                 return;
-    //             if (entry.intersectionRect.left > window.innerWidth / 2 + ref.current!.clientWidth)
-    //                 return;
-    //             if (entry.intersectionRatio >= 0.95 && entry.intersectionRect.left ) {
-    //                 handleClick();
-    //             }
-    //         }
-    //     })
-    // }
-
-    // const observer = new IntersectionObserver(callback, obeserver_options)
-
-    // useEffect(() => {
-    //     observer.observe(ref.current! as Element)
-    // }, [ref]);
 
     const handleClick = () => {
         setActiveSemester(index);
         console.log(index);
     };
 
-    const [options, setOptions] = useState(false);
-
-    const long_press_attrs = useLongPress(
-        () => {
-            if (activeSemester === index && index === Object.keys(data.semesters).length - 1) {
-                setOptions(!options)
-            }
+    useEffect(() => {
+        if (index === activeSemester) {
+            ref.current!.scrollIntoView({ behavior: "smooth", inline: "center" });
         }
-    );
-
-    const handle_delete = () => {
-        if (activeSemester > 0 && activeSemester === index) {
-            setActiveSemester(index - 1);
-        }
-        dispatch({
-            type: "delete semester",
-            semester: index
-        });
-        setOptions(false);
-    }
+    }, [activeSemester, index]);
 
     const points_range_string = useMemo(() => {
             return in_range_or_equal_string(
@@ -82,20 +40,11 @@ function SemesterTab({ data, dispatch, index, activeSemester, setActiveSemester 
         [data, index]
     );
 
-    useEffect(() => {
-        if (index === activeSemester) {
-            ref.current!.scrollIntoView({ behavior: "smooth", inline: "center" });
-        }
-        setOptions(false);
-    }, [activeSemester]);
-
     return (
-        <div className="py-8 h-32 snap-center min-w-60 flex flex-col justify-center items-center"
+        <div className="py-8 h-32 snap-center min-w-60 flex flex-col justify-center items-center select-none"
             ref={ref}>
             <button
-                {...long_press_attrs}
                 className={clsx("w-full flex-column align-middle font-cmu", {
-                    "hidden": options,
                     "opacity-50": activeSemester !== index
                 })}
                 onClick={handleClick}>
@@ -108,22 +57,6 @@ function SemesterTab({ data, dispatch, index, activeSemester, setActiveSemester 
                     GPA {points_range_string}
                 </div>
             </button>
-            <div className={clsx("flex text-xl justify-center space-x-2 items-center border border-whiteish rounded-2xl p-2 w-fit", {
-                "hidden": !options,
-            })}>
-
-                <button
-                    className="font-cmu text-center w-20 rounded-xl font-bold h-12"
-                    onClick={() => setOptions(!options)}>
-                    Cancel
-                </button>
-
-                <button
-                    className="font-cmu text-center w-20 rounded-xl font-bold bg-redish h-12"
-                    onClick={() => handle_delete()}>
-                    Delete
-                </button>
-            </div>
         </div>
     )
 }
@@ -152,6 +85,25 @@ export function AddSemesterButton({ data, dispatch, activeSemester }: AddSemeste
     )
 }
 
+export function RemoveSemesterButton({ data, dispatch, activeSemester, setActiveSemester }: { data: UserData, dispatch: Function, activeSemester: number, setActiveSemester: Function }) {
+    let handleClick = () => {
+        if (Object.keys(data.semesters).length > 1 && activeSemester === Object.keys(data.semesters).length - 1) {
+            setActiveSemester(activeSemester - 1);
+        }
+        dispatch({
+            type: "delete semester"
+        });
+    };
+
+    return (
+        <button
+            className="relative text-redish text-3xl px-4 opacity-50 w-max min-w-fit"
+            onClick={handleClick}>
+            Delete last
+        </button>
+    )
+}
+
 // The bar itself
 
 export type SemesterBarProps = {
@@ -174,6 +126,7 @@ export function SemesterBar({ data, activeSemester, setActiveSemester, dispatch 
                 ))
             }
             <AddSemesterButton {...{data, dispatch, activeSemester}} />
+            <RemoveSemesterButton {...{data, dispatch, activeSemester, setActiveSemester}} />
             <div className="relative min-w-full snap-none"></div>
         </div>
     </div>
