@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useMemo, useState } from "react";
 import { CourseDict, UserData } from "../lib/definitions";
@@ -12,28 +12,38 @@ import cs_data_ from "../lib/cs.json";
 const cs_data = cs_data_ as CourseDict;
 
 export default function Header({ data }: { data: UserData }) {
-    let total_gpa_string = useMemo(
-        () => in_range_or_equal_string(
-            Math.round((total_GPA(data, cs_data, false) + Number.EPSILON) * 100) / 100,
-            Math.round((total_GPA(data, cs_data, true) + Number.EPSILON) * 100) / 100
-        ),
-        [data]
-    );
+  let total_gpa_string = useMemo(
+    () =>
+      in_range_or_equal_string(
+        Math.round((total_GPA(data, cs_data, false) + Number.EPSILON) * 100) /
+          100,
+        Math.round((total_GPA(data, cs_data, true) + Number.EPSILON) * 100) /
+          100,
+      ),
+    [data],
+  );
 
-    return (
-        <div className="relative text-2xl font-cmu text-center p-8 pb-0 opacity-50 flex">
-            <button className="relative w-8 text-brownish text-center rotate-90" onClick={() => {}}>
-                <Image
-                    priority
-                    src="/gpa-calculator/arrow.svg"
-                    alt="Follow us on Twitter"
-                    fill={true}
-                />
-            </button>
-            <div className="flex-grow">
-                Total GPA {total_gpa_string}
-            </div>
-            <div className="w-8"></div>
-        </div>
-    );
+  return (
+    <div className="font-cmu relative flex p-8 pb-0 text-center text-2xl opacity-50">
+      <button
+        className="text-brownish relative w-8 rotate-90 text-center"
+        onClick={() => {}}
+      >
+        {/* <Image
+          priority
+          src="/gpa-calculator/arrow.svg"
+          alt="Follow us on Twitter"
+          fill={true}
+        /> */}
+      </button>
+      <div className="flex-grow">
+        {!Number.isNaN(total_GPA(data, cs_data)) ? (
+          <> Total GPA {total_gpa_string} </>
+        ) : (
+          <> GPA: Not enough data. </>
+        )}
+      </div>
+      <div className="w-8"></div>
+    </div>
+  );
 }
