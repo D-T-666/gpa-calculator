@@ -1,19 +1,19 @@
 import { Course, CourseDict, Syllabus, GradeGroup, UserCourseData, UserSyllabusData, UserData, UserSemesterData } from "./definitions";
 
 export function points_to_GP(points: number): number {
-    if (points < 51) return 0;
-    else if (points < 56) return 0.5;
-    else if (points < 61) return 0.8;
-    else if (points < 64) return 1.0;
-    else if (points < 68) return 1.3;
-    else if (points < 71) return 1.6;
-    else if (points < 74) return 1.9;
-    else if (points < 78) return 2.2;
-    else if (points < 81) return 2.5;
-    else if (points < 85) return 2.8;
-    else if (points < 88) return 3.1;
-    else if (points < 91) return 3.4;
-    else if (points < 94) return 3.7;
+    if (points <= 50) return 0;
+    else if (points <= 55) return 0.5;
+    else if (points <= 60) return 0.8;
+    else if (points <= 64) return 1.0;
+    else if (points <= 67) return 1.3;
+    else if (points <= 70) return 1.6;
+    else if (points <= 73) return 1.9;
+    else if (points <= 77) return 2.2;
+    else if (points <= 80) return 2.5;
+    else if (points <= 84) return 2.8;
+    else if (points <= 87) return 3.1;
+    else if (points <= 90) return 3.4;
+    else if (points <= 93) return 3.7;
     else return 4.0;
 }
 
