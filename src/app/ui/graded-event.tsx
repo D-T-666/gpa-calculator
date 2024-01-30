@@ -29,7 +29,7 @@ export default function GradedEvent({ data, sem, course, group, item, dispatch }
   };
 
   return (
-    <div className="relative my-4 flex text text-xl pl-2 pr-6 items-center">
+    <div className="relative my-4 flex text text-xl px-2 items-center">
       <div className="font-cmu flex-grow">
         {item}
       </div>
