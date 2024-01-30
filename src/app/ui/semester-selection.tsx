@@ -164,7 +164,7 @@ export function SemesterBar({
   dispatch,
 }: SemesterBarProps) {
   return (
-    <div className="bg-greyblue no-scrollbar relative flex-shrink-0 snap-x snap-mandatory snap-always overflow-x-scroll px-8">
+    <div className="bg-greyblue no-scrollbar relative flex-shrink-0 snap-x snap-proximity snap-always overflow-x-scroll px-8">
       <div className="relative flex">
         <div className="relative min-w-full snap-none"></div>
         {Object.keys(data.semesters).map((_, index) => (

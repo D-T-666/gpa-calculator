@@ -37,7 +37,7 @@ export function grade_group_points(
     )
     .sort((a, b) => a - b)
     .slice(group_data.drop)
-    .reduce((a, v) => a + v);
+    .reduce((a, v) => a + v, 0);
 }
 
 export function course_points(

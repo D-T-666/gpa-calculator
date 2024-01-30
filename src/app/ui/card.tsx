@@ -35,7 +35,7 @@ export default function Card({ data, sem, course, dispatch }: { course: string; 
 	};
 
 	return (
-		<div className="bg-whiteish rounded-3xl max-w-[28em] w-full shadow-[0_1rem_2rem_0_rgba(0,0,0,0.2)] text-black p-8 pb-0 font-cmu snap-start">
+		<div className="bg-whiteish rounded-3xl w-full shadow-[0_1rem_2rem_0_rgba(0,0,0,0.2)] text-black p-8 pb-0 font-cmu snap-start">
 			<div className="flex">
 				<h1 className="mb-2 text-2xl flex-grow">
 					{course}
