@@ -487,5 +487,79 @@
         }
       }
     }
+  },
+  "Foundations in Entrepreneurial Business": {
+    "credits": 6,
+    "mode": "total",
+    "parity": "fall",
+    "min_semester": 2,
+    "syllabus": {
+      "Team prioject": {
+        "drop": 0,
+        "items": {
+          "part 1": { "max_points": 15 },
+          "part 2": { "max_points": 15 }
+        }
+      },
+      "Quizes": {
+        "drop": 0,
+        "items": {
+          "Quiz 1": { "max_points": 2.5 },
+          "Quiz 2": { "max_points": 2.5 },
+          "Quiz 3": { "max_points": 2.5 },
+          "Quiz 4": { "max_points": 2.5 }
+        }
+      },
+      "Case analysis & discussions": {
+        "drop": 0,
+        "items": {
+          "CA&D 1": { "max_points": 2.5 },
+          "CA&D 2": { "max_points": 2.5 },
+          "CA&D 3": { "max_points": 2.5 },
+          "CA&D 4": { "max_points": 2.5 }
+        }
+      },
+      "Midterm exam": {
+        "drop": 0,
+        "items": {
+          "Midterm": { "max_points": 20 }
+        }
+      },
+      "Final exam": {
+        "drop": 0,
+        "items": {
+          "Final": { "max_points": 30 }
+        }
+      }
+    }
+  },
+  "Management Science": {
+    "credits": 6,
+    "mode": "total",
+    "parity": "fall",
+    "min_semester": 2,
+    "syllabus": {
+      "Quizes": {
+        "drop": 0,
+        "items": {
+          "Quiz 1": { "max_points": 5 },
+          "Quiz 2": { "max_points": 5 },
+          "Quiz 3": { "max_points": 10 },
+          "Quiz 4": { "max_points": 10 }
+        }
+      },
+      "Midterm exam": {
+        "drop": 0,
+        "items": {
+          "Midterm": { "max_points": 30 }
+        }
+      },
+      "Final exam": {
+        "drop": 0,
+        "items": {
+          "Final": { "max_points": 40 }
+        }
+      }
+    }
   }
 }
