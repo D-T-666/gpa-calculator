@@ -2,7 +2,7 @@
 
 import CardList from "./ui/card-list";
 import { SemesterBar } from "./ui/semester-selection";
-import { useEffect, useReducer, useState } from "react";
+import { useReducer, useState } from "react";
 import { CourseDict, DataUpdateAction, UserCourseData, UserSyllabusData, UserData } from "./lib/definitions";
 import { course_points } from "./lib/calculations";
 

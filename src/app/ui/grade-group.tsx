@@ -23,24 +23,24 @@ export default function GradeGroup({ data, sem, course, group, dispatch }: { dat
 
   return (
     <div className="relative my-4 flex-column font-normal">
-        <div className="relative flex items-center">
-            <button className={clsx("relative min-w-4 w-4 h-4 text-brownish text-center transition", {
+        <button className="relative flex items-center w-full" onClick={() => setUnfolded(!unfolded)}>
+            <div className={clsx("relative min-w-4 w-4 h-4 text-brownish text-center transition", {
                 "-rotate-90": !unfolded
-            })} onClick={() => setUnfolded(!unfolded)}>
+            })}>
                 <Image
                     priority
                     src="/gpa-calculator/arrow.svg"
                     alt="Follow us on Twitter"
                     fill={true}
                 />
-            </button>
-            <label className="relative text-2xl flex-grow ml-4 font-cmu">
+            </div>
+            <label className="relative text-lg flex-grow ml-4 font-cmu">
                 {group}
             </label>
             <div className="relative min-w-fit ml-2 text-right text-brownish font-cmu">
               {points_range_string}
             </div>
-        </div>
+        </button>
 
         <div className={clsx("transition-all duration-500", {"opacity-100 max-h-[100em]": unfolded, "opacity-0 max-h-[0em]": !unfolded})}>
         {

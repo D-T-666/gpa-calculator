@@ -18,7 +18,7 @@ export default function TypeSwitch({ data, sem, course, dispatch }: TypeSwitchPr
             course: course,
         });
     };
-    
+
     const change_to_continuous = () => {
         dispatch({
             type: "convert to continuous",
@@ -26,23 +26,23 @@ export default function TypeSwitch({ data, sem, course, dispatch }: TypeSwitchPr
             course: course,
         });
     };
-        
+
     return (
         <div className="relative rounded-full flex justify-evenly overflow-hidden border-brownish border my-6">
-            <button 
-                className={clsx("text-2xl w-full p-0.5 text-center font-cmu", {
+            <button
+                className={clsx("text-lg w-full p-0.5 text-center font-cmu", {
                     "bg-brownish text-whiteish": data.semesters[sem][course].mode === "continuous",
                     "bg-transparent text-brownish": data.semesters[sem][course].mode !== "continuous"
-                })} 
+                })}
                 onClick={change_to_continuous}>
                 {"Continuous"}
             </button>
 
-            <button 
-                className={clsx("text-2xl w-full p-0.5 text-center font-cmu", {
+            <button
+                className={clsx("text-lg w-full p-0.5 text-center font-cmu", {
                     "bg-brownish text-whiteish": data.semesters[sem][course].mode === "total",
                     "bg-transparent text-brownish": data.semesters[sem][course].mode !== "total"
-                })} 
+                })}
                 onClick={change_to_total}>
                 {"Total"}
             </button>

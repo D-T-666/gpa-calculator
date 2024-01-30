@@ -4,6 +4,7 @@
     "mode": "total",
     "parity": "fall",
     "min_semester": 0,
+    "semester": 0,
     "syllabus": {
       "Short quizzes": {
         "drop": 0,
@@ -50,6 +51,7 @@
     "mode": "total",
     "parity": "fall",
     "min_semester": 0,
+    "semester": 0,
     "syllabus": {
       "Homework": {
         "drop": 0,
@@ -104,6 +106,7 @@
     "mode": "total",
     "parity": "fall",
     "min_semester": 0,
+    "semester": 0,
     "syllabus": {
       "Midterm exam": {
         "drop": 0,
@@ -125,6 +128,7 @@
     "mode": "total",
     "parity": "fall",
     "min_semester": 0,
+    "semester": 0,
     "syllabus": {
       "Midterm exam": {
         "drop": 0,
@@ -146,6 +150,7 @@
     "mode": "total",
     "parity": "fall",
     "min_semester": 0,
+    "semester": 0,
     "syllabus": {
       "Team project": {
         "drop": 0,
@@ -200,6 +205,7 @@
     "mode": "total",
     "parity": "spring",
     "min_semester": 1,
+    "semester": 1,
     "syllabus": {
       "Homework": {
         "drop": 3,
@@ -247,6 +253,7 @@
     "credits": 6,
     "mode": "total",
     "min_semester": 1,
+    "semester": 1,
     "pre_requisites": [
       "Introduction to Informatics 1",
       "Introudction to Computer Architecture"
@@ -257,6 +264,7 @@
     "credits": 6,
     "mode": "total",
     "min_semester": 1,
+    "semester": 1,
     "pre_requisites": ["Introudction to Computer Architecture"],
     "parity": "spring"
   },
@@ -264,6 +272,7 @@
     "credits": 3,
     "mode": "total",
     "min_semester": 1,
+    "semester": 1,
     "parity": "spring"
   },
   "Introduction to Informatics 2": {
@@ -271,6 +280,7 @@
     "mode": "total",
     "pre_requisites": ["Introduction to Informatics 1"],
     "min_semester": 1,
+    "semester": 1,
     "parity": "spring"
   },
   "Algorithms and Data Structures": {
@@ -279,6 +289,7 @@
     "pre_requisites": ["Introduction to Informatics 1", "Discrete Structures"],
     "parity": "fall",
     "min_semester": 2,
+    "semester": 2,
     "syllabus": {
       "Homework": {
         "drop": 4,
@@ -322,6 +333,7 @@
     "mode": "total",
     "parity": "fall",
     "min_semester": 2,
+    "semester": 2,
     "syllabus": {
       "Activity": {
         "drop": 0,
@@ -349,6 +361,7 @@
     "mode": "total",
     "parity": "fall",
     "min_semester": 0,
+    "semester": 2,
     "syllabus": {
       "Homework": {
         "drop": 3,
@@ -393,6 +406,7 @@
     "mode": "total",
     "parity": "fall",
     "min_semester": 2,
+    "semester": 2,
     "syllabus": {
       "Homework": {
         "drop": 2,
@@ -445,6 +459,7 @@
     "mode": "total",
     "parity": "fall",
     "min_semester": 2,
+    "semester": 2,
     "syllabus": {
       "Homework": {
         "drop": 3,
@@ -493,6 +508,7 @@
     "mode": "total",
     "parity": "fall",
     "min_semester": 2,
+    "semester": 2,
     "syllabus": {
       "Team prioject": {
         "drop": 0,
@@ -538,6 +554,7 @@
     "mode": "total",
     "parity": "fall",
     "min_semester": 2,
+    "semester": 2,
     "syllabus": {
       "Quizes": {
         "drop": 0,
