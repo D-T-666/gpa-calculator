@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   applicationName: APP_NAME,
   description: APP_DESCRIPTION,
-  manifest: "/gpa-calculator/manifest.json",
+  manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",

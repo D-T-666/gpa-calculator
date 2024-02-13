@@ -31,7 +31,7 @@ export default function Header({ data }: { data: UserData }) {
       >
         {/* <Image
           priority
-          src="/gpa-calculator/arrow.svg"
+          src="/arrow.svg"
           alt="Follow us on Twitter"
           fill={true}
         /> */}

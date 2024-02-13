@@ -58,7 +58,7 @@ export default function CardList({ semester, data, dispatch }: CardListProps) {
           >
             <Image
               priority
-              src="/gpa-calculator/arrow.svg"
+              src="/arrow.svg"
               alt="Follow us on Twitter"
               fill={true}
             />

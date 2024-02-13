@@ -29,7 +29,7 @@ export default function GradeGroup({ data, sem, course, group, dispatch }: { dat
             })}>
                 <Image
                     priority
-                    src="/gpa-calculator/arrow.svg"
+                    src="/arrow.svg"
                     alt="Follow us on Twitter"
                     fill={true}
                 />
